@@ -29,7 +29,6 @@ from atlas_utils import (
     ensure_dir,
     setup_hf_caches,
     set_seed,
-    get_device,
 )
 
 from prompting_utils import (
@@ -96,7 +95,6 @@ def main ():
     # Setup
     hf_home, scratch_base = setup_hf_caches ()
     set_seed (42)
-    device = get_device ()
     
     
     # Folders

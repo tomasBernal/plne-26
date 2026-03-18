@@ -29,7 +29,6 @@ from atlas_utils import (
     ensure_dir,
     setup_hf_caches,
     set_seed,
-    get_device,
 )
 
 from prompting_utils import (
@@ -94,7 +93,6 @@ def main ():
     # Setup
     hf_home, scratch_base = setup_hf_caches ()
     set_seed (42)
-    device = get_device ()
     
     
     # Folders
@@ -121,7 +119,7 @@ def main ():
         
         
     # Load model and tokenizer
-    model_id = "Qwen/Qwen3-4B"
+    model_id = "google/gemma-2-2b-it"
 
     tokenizer = AutoTokenizer.from_pretrained (
         model_id,

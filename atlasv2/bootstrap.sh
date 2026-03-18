@@ -88,7 +88,7 @@ export MKL_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 
 # HF Token
-
+#export HF_TOKEN="token"
 
 # To get info about the GPU
 nvidia-smi || true

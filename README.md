@@ -1,111 +1,95 @@
-# DLPLN-2025-26
-# Deep Learning para el Procesamiento del Lenguaje Natural
+# PLNE 2026
+# Procesamiento de Lenguaje Natural Escrito
 
-Este repositorio contiene material docente y práctico para la asignatura **Deep Learning para el Procesamiento del Lenguaje Natural (DLPLN)** del curso **2025–26**.
+Este repositorio contiene material docente y práctico para la asignatura **Procesamiento de Lenguaje Natural Escrito (PLNE)** del curso **2026–27**.
 
-El repositorio está dividido en dos grandes bloques:
+## ATLASv2
+Esta carpeta contiene recursos de **apoyo docente y técnico** para aprender a trabajar en el servidor **ATLASv2**.
 
-1) **Web Crawlers**  
-2) **Ejemplos prácticos de uso del servidor ATLASv2 (HPC)**
-
-
-### Web Crawlers
-Esta carpeta contiene scripts sencillos de ejemplo para **recuperar datos de distintas fuentes online** y poder **compilar un corpus propio**.
-
-El objetivo de estos scripts es servir como punto de partida para utilizar dichos datos en las prácticas de las **Partes II y III** de la asignatura.
-
-
-
-### ATLASv2
-Esta carpeta contiene recursos de **apoyo docente y técnico** para aprender a trabajar con un el servidor de computación **ATLASv2**.
-
-#### ¿Qué es ATLASv2?
+### ¿Qué es ATLASv2?
 ATLASv2 es un **clúster** que permite ejecutar:
-- entrenamientos de Deep Learning,
-- experimentos con GPU,
-- procesos costosos en tiempo o memoria,
+- Entrenamiento de modelos de Machine Learning y Deep Learning.
+- Experimentos con GPU.
+- Procesos costosos en tiempo o memoria.
 
-que no serían viables en un ordenador personal.
+Que no serían viables en un ordenador personal.
 
 En lugar de ejecutar programas directamente, los usuarios **envían trabajos (jobs)** al sistema, indicando:
-- qué recursos necesitan (GPU, memoria, tiempo),
-- qué programa quieren ejecutar.
+- Qué recursos necesitan (GPU, memoria, tiempo).
+- Qué programa quieren ejecutar.
 
-#### ¿Qué es Slurm y por qué se usa?
+### ¿Qué es Slurm y por qué se usa?
 **Slurm** es un **gestor de colas y recursos** que se encarga de:
-- asignar CPUs, GPUs y memoria,
-- planificar la ejecución de los trabajos,
-- evitar que varios usuarios interfieran entre sí.
+- Asignar CPUs, GPUs y memoria.
+- Planificar la ejecución de los trabajos.
+- Evitar que varios usuarios interfieran entre sí.
 
+### Comandos slurm que debeís conocer
+- sbatch: para lanzar trabajos, indicando el script a ejecutar.
+- squeue: para consultar la cola de trabajos.
+- scancel: para cancelar un trabajo, indicando su PID.
 
-#### Idea general de los scripts en ATLASv2
+### Idea general de los scripts en ATLASv2
 Esta carpeta tiene recursos de **material de apoyo docente y técnico** para aprender a:
 - ejecutar trabajos con GPU usando Slurm,
 - trabajar con las carpetas temporales `/scratch`, y con el HOME.
-- entrenar y usar modelos de Hugging Face para clasificación de textos, clasificación de secuencias, preguntas y respuestas
-- aplicar distintos paradigmas de aprendizaje de In-Context Learning (zero-shot, few-shot, chain-of-thought) de Google Gemma. 
-- Hacer SFT con LoRA de un modelo LlaMa (META)
+- entrenar y usar modelos de Hugging Face para clasificación de textos
+- aplicar distintos paradigmas de aprendizaje de In-Context Learning (zero-shot, few-shot, chain-of-thought).
 
-#### Estructura general del repositorio
-Dentro de la carpeta `atlasv2/` encontrarás scripts y utilidades organizados por funcionalidad:
+## Estructura general del repositorio
+La estructura principal del repositorio es la siguiente:
 
-- **Scripts de lanzamiento**
-  - `bootstrap.sh`  
-    Script base para lanzar trabajos en ATLASv2 usando Slurm y Apptainer.
-    
+```text
+plne-26/
+├── README.md
+└── atlasv2/
+    ├── bootstrap.sh
+    ├── P8/
+    │   ├── dataset_train.csv
+    │   ├── dataset_test.csv
+    │   ├── finetuning.py
+    │   └── inference.py
+    └── P9/
+        ├── atlas_utils.py
+        ├── prompting_utils.py
+        ├── zero_shot.py
+        ├── few_shot.py
+        └── chain_of_thought.py
+
+```
+
+Descripción por carpetas y ficheros:
+
+- `README.md`  
+  Documento principal del repositorio.
+
+- `atlasv2/bootstrap.sh`  
+  Script de lanzamiento para enviar trabajos al clúster ATLASv2 usando Slurm.
     ```
     Ejemplo: sbatch bootstrap.sh zero_shot.py
     ```
 
-- **Ficheros de utilidades**
-  - `atlas_utils.py`  
-    Funciones comunes para ATLASv2. Estas funcionales se utilizan a lo largo de todos los scripts
-    - creación de carpetas en `/scratch`
-    - configuración de cachés de Hugging Face
-    - fijar semillas
-    - detección de GPU / CPU
+- `atlasv2/P8/` (Práctica 8)  
+  Contiene datos y scripts para fine-tuning e inferencia de un modelo encoder-only:
+  - `dataset_train.csv`: conjunto de entrenamiento.
+  - `dataset_test.csv`: conjunto de test.
+  - `finetuning.py`: fine-tuning de modelos encoder-only.
+  - `inference.py`: generación de predicciones/inferencia.
 
-  - `prompting_utils.py`  
-    Utilidades para trabajar con LLMs:
-    - construcción de prompts tipo chat
-    - normalización de etiquetas en clasificación binaria
-    - extracción del texto generado por el modelo
+- `atlasv2/P9/` (Práctica 9)  
+  Scripts de utilidades y prompting para LLMs:
+  - `atlas_utils.py`: utilidades comunes para entorno ATLASv2.
+  - `prompting_utils.py`: funciones auxiliares para construir prompts y procesar salidas.
+  - `zero_shot.py`: script para experimentos de prompting tipo zero-shot.
+  - `few_shot.py`: script para experimentos de prompting tipo few-shot.
+  - `chain_of_thought.py`: script para experimentos de prompting tipo chain-of-thought.
 
-  - `sft_utils.py`  
-    Utilidades específicas para *Supervised Fine-Tuning (SFT)*:
-    - formateo de ejemplos estilo Alpaca
-    - estimación del ratio caracteres/tokens
-    - preparación de datasets para TRL
 
-- **Ejemplos de PLN / Deep Learning**
-  - `sentence_classification.py`  
-    Clasificación de textos (sentiment analysis).
+## Uso de Hugging Face y `HF_TOKEN`
 
-  - `token_classification.py`  
-    Reconocimiento de entidades nombradas (NER).
+Algunos modelos (**Llama** y **Gemma**, entre otros) están protegidos (*gated models*) y requieren autenticación.
 
-  - `question_answering.py`  
-    Question Answering extractivo.
-
-  - `zero_shot.py`  
-    Clasificación zero-shot con LLMs.
-    
-  - `few_shot.py.py`  
-    Clasificación few-shot con LLMs.
-
-    - `chain_of_thought.py`  
-    Clasificación few-shot con LLMs utilizando 
-
-  - `sft.py`  
-    Fine-tuning supervisado con LoRA (instruction tuning).
-
----
-
-#### Uso de Hugging Face y `HF_TOKEN`
-
-Algunos modelos (**Llama** y **Gema**) están protegidos (*gated models*) y requieren autenticación.
-
-#### Cómo obtener un token de Hugging Face
+### Cómo obtener un token de Hugging Face
 1. Crear una cuenta o iniciar sesión en Hugging Face:
    - https://huggingface.co
 2. Ir a:
@@ -113,3 +97,7 @@ Algunos modelos (**Llama** y **Gema**) están protegidos (*gated models*) y requ
 3. Crear un token (con permisos de lectura es suficiente).
 
 Pon el token en el fichero ```bootstrap.sh``` en la variable ```HF_TOKEN```
+
+```
+  export HF_TOKEN="tu_token"
+```

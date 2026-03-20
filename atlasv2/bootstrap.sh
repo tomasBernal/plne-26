@@ -103,5 +103,6 @@ srun $(command -v apptainer || command -v singularity) exec --nv \
     pip install transformers -U &&
     pip install sentence-transformers -U &&
     pip install -U bitsandbytes &&
+    pip install -U evaluate &&
     python -u \"$PYFILE\" ${PYARGS[@]}
   "

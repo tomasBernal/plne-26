@@ -1,9 +1,9 @@
 import transformers
-from transformers import AutoModelForSequenceClassification, TFAutoModelForSequenceClassification
+from transformers import AutoModelForSequenceClassification
 from transformers import AutoTokenizer
 import torch
 import json
-from transformers import AutoModelForSequenceClassification, TrainingArguments, Trainer, DataCollatorWithPadding
+from transformers import AutoModelForSequenceClassification
 
 
 # Salvamos el modelo reentrenado

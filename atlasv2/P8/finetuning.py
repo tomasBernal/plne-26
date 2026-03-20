@@ -10,11 +10,15 @@ from sklearn.metrics import classification_report
 
 # Modelo BERT en español - BETO
 #path_bert_model = 'dccuchile/bert-base-spanish-wwm-uncased'
+
 # Modelo BERT multilingüe
 #path_bert_model = 'bert-base-multilingual-cased'
-# Modelo BERTIN basado en RoBERTa
-path_bert_model = 'bertin-project/bertin-roberta-base-spanish'
 
+# Modelo BERTIN basado en RoBERTa
+#path_bert_model = 'bertin-project/bertin-roberta-base-spanish'
+
+# Modelo MrBERT basado en BERT
+path_bert_model = 'BSC-LT/MrBERT-es'
 
 # Modelo "destilados" de BERT en español
 #path_bert_model = 'CenIA/distillbert-base-spanish-uncased'

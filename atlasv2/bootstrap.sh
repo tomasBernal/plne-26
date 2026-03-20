@@ -98,5 +98,10 @@ nvidia-smi || true
 srun $(command -v apptainer || command -v singularity) exec --nv \
   --bind /scratch:/scratch \
   "$SIF" \
-  python -u "$PYFILE" "${PYARGS[@]}"
-  
+  bash -c "
+    pip install sentencepiece &&
+    pip install transformers -U &&
+    pip install sentence-transformers -U &&
+    pip install -U bitsandbytes &&
+    python -u \"$PYFILE\" ${PYARGS[@]}
+  "

@@ -1,10 +1,12 @@
-from transformers import AutoModelForSequenceClassification, AutoTokenizer, TrainingArguments, Trainer, DataCollatorWithPadding
 import torch
 import json
 import pandas
-from sklearn.model_selection import train_test_split
-import numpy as np
 import random
+
+import numpy as np
+
+from transformers import AutoModelForSequenceClassification, AutoTokenizer, TrainingArguments, Trainer, DataCollatorWithPadding
+from sklearn.model_selection import train_test_split
 from evaluate import load
 from sklearn.metrics import classification_report
 

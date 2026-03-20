@@ -119,7 +119,7 @@ def main ():
         
         
     # Load model and tokenizer
-    model_id = "google/gemma-2-2b-it"
+    model_id = "google/gemma-3-4b-it"
 
     tokenizer = AutoTokenizer.from_pretrained (
         model_id,

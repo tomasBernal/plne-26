@@ -39,7 +39,7 @@
 
 # Configure
 # AppTainer Container
-SIF="/software/singularity/Informatica/mia-dlpln2-apptainer/mia_dlpln_parte2_1.0.sif"
+SIF="/software/singularity/Informatica/plne-apptainer/plne_2.0.sif"
 
 
 # Bind args to pass to the python script

@@ -39,7 +39,7 @@
 
 # Configure
 # AppTainer Container
-SIF="/software/singularity/Informatica/plne-apptainer/plne_2.0.sif"
+SIF="/software/singularity/Informatica/plne-apptainer/plne_3.0.sif"
 
 
 # Bind args to pass to the python script
@@ -98,11 +98,4 @@ nvidia-smi || true
 srun $(command -v apptainer || command -v singularity) exec --nv \
   --bind /scratch:/scratch \
   "$SIF" \
-  bash -c "
-    pip install sentencepiece &&
-    pip install transformers -U &&
-    pip install sentence-transformers -U &&
-    pip install -U bitsandbytes &&
-    pip install -U evaluate &&
-    python -u \"$PYFILE\" ${PYARGS[@]}
-  "
+  bash -c "python -u \"$PYFILE\" ${PYARGS[@]}"
